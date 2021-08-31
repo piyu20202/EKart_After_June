@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_margin="@dimen/dimen_2dp"
+            android:src="@drawable/tl"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/imgloc"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:visibility="gone"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/txt_currentloc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:fontFamily="@font/open_sans_bold"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:padding="@dimen/dimen_5dp"
+            android:textSize="@dimen/dimen_12sp"
+            android:visibility="gone" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:onClick="OnClickBtn"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="7dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rate_our_product"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginEnd="@dimen/dimen_30dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/notNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/black"
+                    android:background="@color/light_gray"
+                    android:text="NOT NOW"
+                    android:padding="@dimen/dimen_5dp"
+                    android:textColor="@color/black"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/home_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:background="@drawable/bg_button"
+                    android:text=" RATE US "
+                    android:padding="@dimen/dimen_5dp"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:textColor="@color/white"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/layout_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layoutSearch"
+        android:layout_marginTop="0dp"
+        android:visibility="visible"/>
+
+    <!--</androidx.cardview.widget.CardView>
+</FrameLayout>-->
+</RelativeLayout>
+

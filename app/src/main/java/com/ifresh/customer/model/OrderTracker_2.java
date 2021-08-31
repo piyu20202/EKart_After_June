@@ -1,0 +1,305 @@
+package com.ifresh.customer.model;
+
+import android.util.Log;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class OrderTracker_2 implements Serializable {
+
+    public String show_id,username, id, user_id, order_id,revised_unit, revised_measurement, revised_qty, revised_price, revised_status, product_variant_id, quantity, price, discount, order_type,dPercent, dAmount, sub_total, tax_amt, tax_percent, deliver_by, date_added, date_delivery,name, image, measurement, unit, status, statusdate, mobile, product_rate, dboy_rate, comment, why_low_rate,delivery_charge, payment_method, address, final_total, total, walletBalance, promoCode, promoDiscount, activeStatus, activeStatusDate, delivery_total,received_total;
+    public ArrayList<OrderTracker_2> orderStatusArrayList;
+    ArrayList<OrderTracker_2> review_orderArrayList;
+    public ArrayList<OrderTracker_2> itemsList;
+
+
+
+    public OrderTracker_2(String show_id, String user_id, String order_id, String date_added, String date_delivery , String status, String statusdate, ArrayList<OrderTracker_2> orderStatusArrayList, ArrayList<OrderTracker_2> review_orderArrayList, String mobile, String product_rate, String dboy_rate, String comment, String why_low_rate, String delivery_charge, String payment_method, String address, String total, String final_total, String delivery_total, String received_total, String tax_amt, String tax_percent, String walletBalance, String promoCode, String promoDiscount, String dPercent, String order_type, String dAmount, String username, ArrayList<OrderTracker_2> itemsList) {
+        this.show_id=show_id;
+        this.user_id = user_id;
+        this.order_id = order_id;
+        this.date_added = date_added;
+        this.date_delivery = date_delivery;
+        this.status = status;
+        this.statusdate = statusdate;
+
+        this.orderStatusArrayList = orderStatusArrayList;
+        this.review_orderArrayList = review_orderArrayList;
+        this.mobile = mobile;
+        this.product_rate=product_rate;
+        this.dboy_rate=dboy_rate;
+        this.comment=comment;
+        this.why_low_rate=why_low_rate;
+
+        this.delivery_charge = delivery_charge;
+        this.payment_method = payment_method;
+        this.address = address;
+        this.total = total;
+        this.final_total = final_total;
+        this.delivery_total = delivery_total;
+        this.received_total = received_total;
+        this.tax_amt = tax_amt;
+        this.tax_percent = tax_percent;
+        this.walletBalance = walletBalance;
+        this.promoCode = promoCode;
+        this.promoDiscount = promoDiscount;
+        this.dAmount = dAmount;
+        this.order_type = order_type;
+        this.dPercent = dPercent;
+        this.username = username;
+        this.itemsList = itemsList;
+
+        Log.d("perent==>",""+ dPercent);
+
+
+    }
+
+    public String getShow_id() {
+        return show_id;
+    }
+
+    public void setShow_id(String show_id) {
+        this.show_id = show_id;
+    }
+
+
+    public OrderTracker_2(String id, String order_id, String revised_unit, String revised_measurement, String revised_qty, String revised_price, String revised_status, String product_variant_id, String quantity, String price, String discount, String order_type , String sub_total, String deliver_by, String name, String image, String measurement, String unit, String payment_method, String activeStatus, String activeStatusDate, ArrayList<OrderTracker_2> orderStatusArrayList) {
+        this.id = id;
+        this.order_id = order_id;
+        this.revised_unit = revised_unit;
+        this.revised_measurement = revised_measurement;
+        this.revised_qty = revised_qty;
+        this.revised_price = revised_price;
+        this.revised_status = revised_status;
+        this.product_variant_id = product_variant_id;
+        this.quantity = quantity;
+        this.price = price;
+        this.discount = discount;
+        this.order_type = order_type;
+        this.sub_total = sub_total;
+
+        this.deliver_by = deliver_by;
+        this.name = name;
+        this.image = image;
+        this.measurement = measurement;
+        this.unit = unit;
+        this.payment_method = payment_method;
+        this.activeStatus = activeStatus;
+        this.activeStatusDate = activeStatusDate;
+        this.orderStatusArrayList = orderStatusArrayList;
+    }
+
+    public String getdPercent() {
+        return dPercent;
+    }
+
+    public String getOrder_type() {
+        return order_type;
+    }
+
+    public void setOrder_type(String order_type) {
+        this.order_type = order_type;
+    }
+
+    public String getdAmount() {
+        return dAmount;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public String getWalletBalance() {
+        return walletBalance;
+    }
+
+    public String getPromoCode() {
+        return promoCode;
+    }
+
+    public String getPromoDiscount() {
+        return promoDiscount;
+    }
+
+    public String getTax_amt() {
+        return tax_amt;
+    }
+
+    public String getTax_percent() {
+        return tax_percent;
+    }
+
+    public String getActiveStatus() {
+        return activeStatus;
+    }
+
+    public String getActiveStatusDate() {
+        return activeStatusDate;
+    }
+
+    public ArrayList<OrderTracker_2> getItemsList() {
+        return itemsList;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getDelivery_charge() {
+        return delivery_charge;
+    }
+
+    public String getPayment_method() {
+        return payment_method;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getFinal_total() {
+        return final_total;
+    }
+
+    public String getDelivery_total() {
+        return delivery_total;
+    }
+
+    public String getReceived_total() {
+        return received_total;
+    }
+
+    public ArrayList<OrderTracker_2> getOrderStatusArrayList() {
+        return orderStatusArrayList;
+    }
+
+    public OrderTracker_2(String status, String statusdate) {
+        this.status = status;
+        this.statusdate = statusdate;
+    }
+
+    public OrderTracker_2(String product_rate, String dboy_rate, String comment,String why_low_rate) {
+        this.product_rate = product_rate;
+        this.dboy_rate = dboy_rate;
+        this.comment = comment;
+        this.why_low_rate = why_low_rate;
+    }
+
+    public String getProduct_rate()
+    {
+        return product_rate;
+    }
+
+    public String getDboy_rate()
+    {
+        return dboy_rate;
+    }
+
+    public String getComment()
+    {
+        return comment;
+    }
+
+    public String getWhy_low_rate()
+    {
+        return why_low_rate;
+    }
+
+
+    public ArrayList<OrderTracker_2> getOrderReviewArrayList() {
+        return review_orderArrayList;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public String getOrder_id() {
+        return order_id;
+    }
+
+
+    public String getRevised_unit() {
+        return revised_unit;
+    }
+
+    public String getRevised_measurement() {
+        return revised_measurement;
+    }
+
+    public String getRevised_qty() {
+        return revised_qty;
+    }
+
+    public String getRevised_price() {
+        return revised_price;
+    }
+
+    public String getRevised_status() {
+        return revised_status;
+    }
+
+    public String getProduct_variant_id() {
+        return product_variant_id;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public String getSub_total() {
+        return sub_total;
+    }
+
+    public String getDeliver_by() {
+        return deliver_by;
+    }
+
+    public String getDate_added() {
+        return date_added;
+    }
+
+    public String getDate_delivery() {
+        return date_delivery;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getStatusdate() {
+        return statusdate;
+    }
+}
