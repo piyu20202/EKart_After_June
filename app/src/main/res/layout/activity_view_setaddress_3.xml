@@ -198,16 +198,15 @@
 
                 <TextView
                     android:id="@+id/last_state"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/dimen_2dp"
-                    android:padding="@dimen/dimen_2dp"
-                    android:text=""
                     android:textColor="#879CA6"
                     android:textDirection="rtl"
-                    android:textSize="11sp"
-                    android:visibility="gone" />
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    tools:ignore="SmallSp" />
 
 
 
@@ -256,17 +255,15 @@
 
                 <TextView
                     android:id="@+id/last_city"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/dimen_2dp"
-                    android:padding="@dimen/dimen_2dp"
-                    android:text=""
                     android:textColor="#879CA6"
                     android:textDirection="rtl"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    tools:ignore="SmallSp" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -310,15 +307,15 @@
 
                 <TextView
                     android:id="@+id/last_area"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/dimen_2dp"
-                    android:padding="@dimen/dimen_2dp"
                     android:textColor="#879CA6"
                     android:textDirection="rtl"
-                    android:textSize="11sp"
-                    android:visibility="gone" />
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    tools:ignore="SmallSp" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"

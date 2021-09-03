@@ -46,7 +46,8 @@ import static com.ifresh.customer.helper.Constant.GET_TRACKORDER;
 import static com.ifresh.customer.helper.Session.KEY_FIRSTNAME;
 import static com.ifresh.customer.helper.Session.KEY_LASTNAME;
 
-public class OrderListActivity_2 extends AppCompatActivity {
+public class OrderListActivity_2 extends AppCompatActivity
+{
     LinearLayout lytempty, lytdata;
     public static ArrayList<OrderTracker_2> orderTrackerslist, cancelledlist, deliveredlist, processedlist, shippedlist, returnedList;
     Session session;

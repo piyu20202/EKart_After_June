@@ -530,6 +530,8 @@ public class ProductDetailActivity_2 extends AppCompatActivity {
             txtDiscountedPrice.setVisibility(View.GONE);
         }
 
+
+
         if (priceVariation.getServe_for().equalsIgnoreCase(Constant.SOLDOUT_TEXT)) {
             txtstatus.setVisibility(View.VISIBLE);
             lytqty.setVisibility(View.GONE);

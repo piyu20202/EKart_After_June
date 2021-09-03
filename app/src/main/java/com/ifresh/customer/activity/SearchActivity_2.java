@@ -72,7 +72,8 @@ public class SearchActivity_2 extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
@@ -197,7 +198,7 @@ public class SearchActivity_2 extends AppCompatActivity {
 
                             if(jsonArray_products.length() > 0)
                             {
-                                arrayList_product = ApiConfig.GetProductList_2(jsonArray_products, measurement_list);
+                                arrayList_product = ApiConfig.GetProductList_2(jsonArray_products, measurement_list,session);
                                 callProductListAdapter(arrayList_product);
                             }
                             else{
@@ -375,5 +376,14 @@ public class SearchActivity_2 extends AppCompatActivity {
         menu.findItem(R.id.menu_cart).setIcon(ApiConfig.buildCounterDrawable(databaseHelper.getTotalItemOfCart(), R.drawable.ic_cart, SearchActivity_2.this));
         return super.onPrepareOptionsMenu(menu);
     }
+
+
+
+
+
+
+
+
+
 
 }

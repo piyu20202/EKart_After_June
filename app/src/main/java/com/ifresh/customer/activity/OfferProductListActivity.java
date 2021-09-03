@@ -219,7 +219,7 @@ public class OfferProductListActivity extends AppCompatActivity {
                                 if(jsonArray_products.length() > 0)
                                 {
                                     //call function
-                                    arrayList_product =ApiConfig.GetOfferProductList_2(jsonArray_products, measurement_list);
+                                    arrayList_product =ApiConfig.GetOfferProductList_2(jsonArray_products, measurement_list,session);
                                     if(arrayList_product.size() > 0)
                                     {
                                         progressBar.setVisibility(View.GONE);

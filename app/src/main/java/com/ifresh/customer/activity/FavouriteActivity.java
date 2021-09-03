@@ -31,6 +31,7 @@ import com.ifresh.customer.helper.Session;
 import com.ifresh.customer.helper.VolleyCallback;
 import com.ifresh.customer.model.Mesurrment;
 import com.ifresh.customer.model.ModelProduct;
+import com.ifresh.customer.model.Quality;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +55,7 @@ public class FavouriteActivity extends AppCompatActivity {
     ProductAdapter productAdapter;
     Toolbar toolbar;
     //public RelativeLayout layoutSearch;
-    String category_id;
+    //String category_id;
     static Session session;
     Activity activity = FavouriteActivity.this;
     Context mContext =  FavouriteActivity.this;
@@ -66,6 +67,7 @@ public class FavouriteActivity extends AppCompatActivity {
     String search_query="0", price="1", product_on="1";
 
     ProductListAdapter_2 productListAdapter;
+    public static ArrayList<Quality> qualityArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class FavouriteActivity extends AppCompatActivity {
 
         progressbar = findViewById(R.id.progressbar);
         txtnodata = findViewById(R.id.txtnodata);
-        category_id = getIntent().getStringExtra(Constant.CAT_ID);
+        //category_id = getIntent().getStringExtra(Constant.CAT_ID);
 
         favrecycleview = findViewById(R.id.favrecycleview);
         //layoutSearch = findViewById(R.id.layoutSearch);
@@ -110,6 +112,7 @@ public class FavouriteActivity extends AppCompatActivity {
     {
         progressbar.setVisibility(View.VISIBLE);
         productArrayList = new ArrayList<>();
+
         final ArrayList<String> idslist = databaseHelper.getFavourite();
 
         if (idslist.isEmpty())
@@ -148,7 +151,8 @@ public class FavouriteActivity extends AppCompatActivity {
                                     JSONObject data_obj = data_arr.getJSONObject(0);
                                     JSONArray jsonArray_products = data_obj.getJSONArray("products");
 
-                                    productArrayList.add(ApiConfig.GetProductList_2(jsonArray_products, measurement_list).get(0));
+                                    productArrayList.add( ApiConfig.GetProductList_2( jsonArray_products, measurement_list,session) .get(0) );
+
                                     productListAdapter = new ProductListAdapter_2(mContext, productArrayList,activity,session);
                                     favrecycleview.setAdapter(productListAdapter);
                                     progressbar.setVisibility(View.GONE);
@@ -188,6 +192,20 @@ public class FavouriteActivity extends AppCompatActivity {
                 JSONObject object1 = jsonArray.getJSONObject(i);
                 measurement_list.add(new Mesurrment(object1.getString("id"), object1.getString("title"), object1.getString("abv")));
             }
+
+            JSONArray jsonArray_qty = new JSONArray(session.getData(Constant.KEY_QUALITY));
+            qualityArrayList = new ArrayList<>();
+            for (int i = 0; i < jsonArray_qty.length(); i++)
+            {
+                JSONObject object1 = jsonArray_qty.getJSONObject(i);
+                qualityArrayList.add(new Quality(object1.getString("id"), object1.getString("title")));
+            }
+
+
+
+
+
+
         }
         catch (Exception ex)
         {
@@ -231,10 +249,10 @@ public class FavouriteActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menu_cart:
-                Intent intent  = new Intent(getApplicationContext(), CartActivity_2.class);
+                /*Intent intent  = new Intent(getApplicationContext(), CartActivity_2.class);
                 intent.putExtra("id", category_id);
                 startActivity(intent);
-                return true;
+                return true;*/
 
 
             case R.id.menu_sort:
@@ -332,7 +350,7 @@ public class FavouriteActivity extends AppCompatActivity {
         /* if (from.equals("section"))*/
         menu.findItem(R.id.menu_sort).setVisible(true);
         menu.findItem(R.id.menu_search).setVisible(true);
-        menu.findItem(R.id.menu_cart).setVisible(true);
+        menu.findItem(R.id.menu_cart).setVisible(false);
 
         menu.findItem(R.id.menu_cart).setIcon(ApiConfig.buildCounterDrawable(databaseHelper.getTotalItemOfCart(), R.drawable.ic_cart, FavouriteActivity.this));
         return super.onPrepareOptionsMenu(menu);

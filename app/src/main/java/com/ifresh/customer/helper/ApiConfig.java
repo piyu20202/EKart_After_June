@@ -114,8 +114,10 @@ public class ApiConfig {
     public static GPSTracker gps;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
 
+    public static ArrayList<Quality> qualityArrayList_arr;
+
     //context
-    public static Context context;
+    public  Context context;
     static DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     private static final int PERMISSION_CALLBACK_CONSTANT = 100;
@@ -473,6 +475,7 @@ public class ApiConfig {
                                 {
                                     Constant.merchant_id = "0";
                                 }
+
                                 if(objectbject.has("paytm_mkey"))
                                 {
                                     Constant.merchant_key = objectbject.getString("paytm_mkey");
@@ -481,6 +484,11 @@ public class ApiConfig {
                                 {
                                     Constant.merchant_key = "0";
                                 }
+
+                                Log.d("merchant_key",Constant.merchant_key);
+                                Log.d("merchant_id",Constant.merchant_id);
+
+
 
                                 /*//payment
                                 Constant.merchant_id = objectbject.getString("paytm_mid");
@@ -520,6 +528,7 @@ public class ApiConfig {
                                     Constant.REFER_EARN_ACTIVE = "0";
                                 }
 
+
                                 //both end change
                                 session.setBoolean(Constant.KEY_ISREG, objectbject.getBoolean("reg_required"));
                                 session.setBoolean(Constant.KEY_REFERFR, objectbject.getBoolean("refer_earn"));
@@ -548,6 +557,23 @@ public class ApiConfig {
                                     session.setString(Constant.delivery_time_note, "Please Select Different Delivery Date");
                                 }
 
+
+                                if(objectbject.has("is_wholesaler"))
+                                {
+                                    if(objectbject.getString("is_wholesaler").equalsIgnoreCase("0"))
+                                    {
+                                        Constant.ISWHOLESALERSHOW = "0";
+                                    }
+                                    else if(objectbject.getString("is_wholesaler").equalsIgnoreCase("1"))
+                                    {
+                                        Constant.ISWHOLESALERSHOW = "1";
+                                    }
+                                }
+                                else{
+                                    Constant.ISWHOLESALERSHOW = "0";
+
+                                }
+
                                 //session.setString(Constant.delivery_time_full_note, objectbject.getString("delivery_time_full_note"));
                                 //session.setString(Constant.delivery_time_note, objectbject.getString("delivery_time_note"));
 
@@ -573,9 +599,9 @@ public class ApiConfig {
     }
 
 
-    public static ArrayList<ModelProduct>GetProductList_2(JSONArray jsonArray_products,ArrayList<Mesurrment> mesurrment)
+    public static ArrayList<ModelProduct>GetProductList_2(JSONArray jsonArray_products,ArrayList<Mesurrment> mesurrment,Session session)
     {
-        Session session = new Session(context);
+
         ArrayList<ModelProduct> arrayList_vertical  = new ArrayList<>();;
         try{
             for(int i =0; i < jsonArray_products.length();i++)
@@ -597,10 +623,14 @@ public class ApiConfig {
                     vertical_productList.setProduct_unit(mjson_obj.getString("product_unit"));
                     vertical_productList.setMax_order(mjson_obj.getString("max_order"));
 
+
+                    call_qualityList(session);
+
+
                     /* Set  Qty array List */
-                    for(int q=0; q< ProductListActivity_2.qualityArrayList.size(); q++)
+                    for(int q=0; q< qualityArrayList_arr.size(); q++)
                     {
-                        Quality quality = ProductListActivity_2.qualityArrayList.get(q);
+                        Quality quality = qualityArrayList_arr.get(q);
                         if(mjson_obj.getString("product_quality").equalsIgnoreCase(quality.getId()))
                         {
                             vertical_productList.setQty_str(quality.getTitle());
@@ -662,29 +692,27 @@ public class ApiConfig {
 
                             if(session.getBoolean(Session.KEY_is_wholesaler))
                             {
-                                if (mjson_prodvar.getString("disc_price").equals("0"))
-                                     productPrice = mjson_prodvar.getString("wholesale");
-                                else {
+                                if (!mjson_prodvar.getString("disc_price").equals("0")) {
                                     discountpercent = ApiConfig.GetDiscount(mjson_prodvar.getString("wholesale"), mjson_prodvar.getString("disc_price"));
-                                    productPrice = mjson_prodvar.getString("wholesale");
+                                    //productPrice = discountpercent;
                                 }
+
+                                productPrice = mjson_prodvar.getString("wholesale");
+
                             }
                             else
                             {
-                                if (mjson_prodvar.getString("disc_price").equals("0"))
-                                productPrice = mjson_prodvar.getString("price");
-                            else {
-                                discountpercent = ApiConfig.GetDiscount(mjson_prodvar.getString("price"), mjson_prodvar.getString("disc_price"));
-                                productPrice = mjson_prodvar.getString("price");
-                            }
-                            }
+                                if (!mjson_prodvar.getString("disc_price").equals("0")) {
+                                    discountpercent = ApiConfig.GetDiscount(mjson_prodvar.getString("price"), mjson_prodvar.getString("disc_price"));
+                                    //productPrice = discountpercent;
+                                }
 
-
+                               productPrice = mjson_prodvar.getString("price");
+                            }
                             String prod_type;
                             if(mjson_obj.getBoolean("isPacket"))
                             {
                                 prod_type = "Packet";
-
                             }
                             else{
                                 prod_type = "loose";
@@ -718,6 +746,7 @@ public class ApiConfig {
 
                         vertical_productList.setPriceVariations(arr_productVariations);
                     }
+
                     arrayList_vertical.add(vertical_productList);
 
                 }
@@ -734,16 +763,16 @@ public class ApiConfig {
             ex.printStackTrace();
         }
 
-        //Log.d("list", arrayList_vertical.toString());
+        Log.d("list", arrayList_vertical.toString());
 
         return  arrayList_vertical;
 
     }
 
 
-    public static ArrayList<ModelProduct>GetOfferProductList_2(JSONArray jsonArray_products,ArrayList<Mesurrment> mesurrment)
+    public static ArrayList<ModelProduct>GetOfferProductList_2(JSONArray jsonArray_products,ArrayList<Mesurrment> mesurrment, Session session)
     {
-        Session session = new Session(context);
+        //Session session = new Session(context);
         ArrayList<ModelProduct> arrayList_vertical  = new ArrayList<>();;
         try{
             for(int i =0; i < jsonArray_products.length();i++)
@@ -912,9 +941,9 @@ public class ApiConfig {
 
     }
 
-    public static ArrayList<ModelProduct>GetFeatureProduct_2(JSONArray jsonArray_products,ArrayList<Mesurrment> mesurrment)
+    public static ArrayList<ModelProduct>GetFeatureProduct_2(JSONArray jsonArray_products,ArrayList<Mesurrment> mesurrment, Session session)
     {
-        Session session = new Session(context);
+        //Session session = new Session(context);
         ArrayList<ModelProduct> arrayList_vertical  = new ArrayList<>();;
         try{
             for(int i =0; i < jsonArray_products.length();i++)
@@ -1134,9 +1163,9 @@ public class ApiConfig {
     }
 
 
-    public static ModelProduct GetCartList2(JSONArray jsonArray, String vid, String qty, DatabaseHelper databaseHelper,ArrayList<Mesurrment> measurement_list)
+    public static ModelProduct GetCartList2(JSONArray jsonArray, String vid, String qty, DatabaseHelper databaseHelper,ArrayList<Mesurrment> measurement_list, Session session)
     {
-        Session session = new Session(context);
+        //Session session = new Session(context);
         ModelProduct modelProduct = null;
         try {
             Log.d("array", jsonArray.toString());
@@ -1742,13 +1771,19 @@ public class ApiConfig {
     }
 
 
-    public static String GetDiscount(String oldprice, String newprice)
+    public static String GetDiscount(String price, String dis_price)
     {
-        double dold = Double.parseDouble(oldprice);
-        double dnew = Double.parseDouble(newprice);
+        double price_val = Double.parseDouble(price);
+        double dis_price_val = Double.parseDouble(dis_price);
 
         //return String.valueOf(((dnew / dold) - 1) * 100);
-        return " (" + String.format("%.2f", (((dnew / dold) - 1) * 100)) + "%)";
+
+        double temp_price = (price_val * dis_price_val) / 100;
+        temp_price = price_val - temp_price ;
+
+        Log.d("temp_price", ""+temp_price);
+
+        return String.valueOf(temp_price);
     }
 
 
@@ -1971,67 +2006,6 @@ public class ApiConfig {
         return new BitmapDrawable(activity.getResources(), bitmap);
     }
 
-    public static void GetSettings(final Activity activity)
-    {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put(Constant.GET_SETTINGS, Constant.GetVal);
-        ApiConfig.RequestToVolley(new VolleyCallback() {
-            @Override
-            public void onSuccess(boolean result, String response) {
-                  System.out.println("============" + response);
-                if (result) {
-                    try {
-                        JSONObject objectbject = new JSONObject(response);
-                        if (!objectbject.getBoolean(Constant.ERROR)) {
-                            JSONObject object = objectbject.getJSONObject(Constant.SETTINGS);
-                            Constant.VERSION_CODE = object.getString(Constant.KEY_VERSION_CODE);
-                            Constant.REQUIRED_VERSION = object.getString(Constant.KEY_VERSION_CODE);
-                            Constant.VERSION_STATUS = object.getString(Constant.KEY_UPDATE_STATUS);
-                            Constant.REFER_EARN_BONUS = object.getString(Constant.KEY_REFER_EARN_BONUS);
-                            Constant.REFER_EARN_ACTIVE = object.getString(Constant.KEY_REFER_EARN_STATUS);
-                            Constant.REFER_EARN_METHOD = object.getString(Constant.KEY_REFER_EARN_METHOD);
-                            Constant.REFER_EARN_ORDER_AMOUNT = object.getString(Constant.KEY_MIN_REFER_ORDER_AMOUNT);
-                            Constant.MAX_EARN_AMOUNT = object.getString(Constant.KEY_MAX_EARN_AMOUNT);
-                            Constant.MINIMUM_WITHDRAW_AMOUNT = Double.parseDouble(object.getString(Constant.KEY_MIN_WIDRAWAL));
-                            Constant.SETTING_CURRENCY_SYMBOL = object.getString(Constant.CURRENCY);
-                            Constant.SETTING_TAX = Double.parseDouble(object.getString(Constant.TAX));
-                            Constant.SETTING_DELIVERY_CHARGE = Double.parseDouble(object.getString(Constant.DELIEVERY_CHARGE));
-                            Constant.SETTING_MAIL_ID = object.getString(Constant.REPLY_TO);
-                            Constant.SETTING_MINIMUM_AMOUNT_FOR_FREE_DELIVERY = Double.parseDouble(object.getString(Constant.MINIMUM_AMOUNT));
-
-                            Constant.ORDER_DAY_LIMIT = Integer.parseInt(object.getString(Constant.KEY_ORDER_RETURN_DAY_LIMIT));
-
-                            if (DrawerActivity.tvWallet != null) {
-                               try {
-                                   DrawerActivity.tvWallet.setText(activity.getResources().getString(R.string.wallet_balance) + "\t:\t" + Constant.SETTING_CURRENCY_SYMBOL + Constant.WALLET_BALANCE);
-                               }
-                               catch (Exception ex){
-                                   ex.printStackTrace();
-                               }
-                            }
-
-                            String versionName = "";
-                            try {
-                                PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-                                versionName = packageInfo.versionName;
-                            } catch (PackageManager.NameNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            if (ApiConfig.compareVersion(versionName, Constant.VERSION_CODE) < 0) {
-                                //OpenBottomDialog(activity);
-                            } else if (ApiConfig.compareVersion(versionName, Constant.REQUIRED_VERSION) < 0) {
-                                //OpenBottomDialog(activity);
-                            }
-
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, activity, Constant.ORDERPROCESS_URL, params, false);
-    }
 
     public static void GetPaymentConfig(final Activity activity) {
         Map<String, String> params = new HashMap<>();
@@ -2312,7 +2286,30 @@ public class ApiConfig {
         return 0;
     }
 
+
     /*================================================== Old Method End ======================================================= */
+
+
+
+    public static void call_qualityList(Session session)
+    {
+        try{
+            JSONArray jsonArray_qty = new JSONArray(session.getData(Constant.KEY_QUALITY));
+            qualityArrayList_arr = new ArrayList<>();
+            for (int i = 0; i < jsonArray_qty.length(); i++)
+            {
+                JSONObject object1 = jsonArray_qty.getJSONObject(i);
+                qualityArrayList_arr.add(new Quality(object1.getString("id"), object1.getString("title")));
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+
+
 
 
 }

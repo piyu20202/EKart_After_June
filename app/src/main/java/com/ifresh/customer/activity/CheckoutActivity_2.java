@@ -2071,9 +2071,9 @@ public class CheckoutActivity_2 extends AppCompatActivity implements OnMapReadyC
                                     }
                                 }
 
-
                                 if(Constant.ISACCEPTMINORDER)
                                 {
+                                    //Accept min order less than 300 rs
                                     tvConfirmOrder.setEnabled(true);
                                     tvConfirmOrder.setBackground(ctx.getResources().getDrawable(R.drawable.confirm_bg));
                                 }
@@ -2090,6 +2090,8 @@ public class CheckoutActivity_2 extends AppCompatActivity implements OnMapReadyC
 
                                     }
                                 }
+
+
 
                             }
                             else{

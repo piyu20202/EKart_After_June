@@ -20,7 +20,6 @@ public class Constant {
     //public static String BASEPATH = "http://192.168.1.32:3000/api/";
     //public static String IMAGEBASEPATH= "http://192.168.1.32:3000/uploads/";
 
-
     /*=========================================================================================================*/
     public static String BANNERIMAGEPATH = IMAGEBASEPATH+"banner_img/";
     public static String CATEGORYIMAGEPATH = IMAGEBASEPATH+"catagory_img/";
@@ -362,6 +361,9 @@ public class Constant {
     public static String REFER_EARN_ORDER_AMOUNT = "";
     public static String REFER_EARN_METHOD = "";
     public static String REFER_EARN_ACTIVE = "";
+
+    public static String ISWHOLESALERSHOW = "";
+
 
 
     public static String AUTHTOKEN="authtoken";

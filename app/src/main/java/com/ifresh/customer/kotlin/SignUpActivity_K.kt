@@ -107,6 +107,18 @@ class SignUpActivity_K : AppCompatActivity()
             }
         })
 
+
+
+        if(ISWHOLESALERSHOW == "0")
+        {
+            lytPrivacy.visibility=GONE
+        }
+        else{
+            lytPrivacy.visibility= VISIBLE
+        }
+
+
+
     }
 
     private fun initTracking() {
@@ -187,7 +199,7 @@ class SignUpActivity_K : AppCompatActivity()
             if (result) {
                 try {
                     println("===n response $response")
-                    progressBar.visibility= View.GONE
+                    progressBar.visibility= GONE
                     val jsonObject = JSONObject(response)
                     if (jsonObject.getInt(Constant.SUCESS) == 200)
                     {
@@ -211,7 +223,7 @@ class SignUpActivity_K : AppCompatActivity()
                     }
 
                 } catch (e: java.lang.Exception) {
-                    progressBar.visibility= View.GONE
+                    progressBar.visibility= GONE
                     e.printStackTrace()
                 }
             }
@@ -259,7 +271,7 @@ class SignUpActivity_K : AppCompatActivity()
             if (result) {
                 try {
                     println("===n response $response")
-                    progressBar.visibility= View.GONE
+                    progressBar.visibility= GONE
                     val jsonObject = JSONObject(response)
                     if (jsonObject.getInt(Constant.SUCESS) == 200)
                     {
@@ -282,7 +294,7 @@ class SignUpActivity_K : AppCompatActivity()
                         refer_code_val.text=""
                     }
                 } catch (e: java.lang.Exception) {
-                    progressBar.visibility= View.GONE
+                    progressBar.visibility= GONE
                     e.printStackTrace()
                 }
             }
@@ -321,7 +333,7 @@ class SignUpActivity_K : AppCompatActivity()
         override fun onPostExecute(publicIp: String)
         {
             super.onPostExecute(publicIp)
-            progressBar.visibility= View.GONE
+            progressBar.visibility= GONE
             Log.e("PublicIP", publicIp + "")
             ip_address = publicIp
             //Toast.makeText(mContext, "ip$publicIp", Toast.LENGTH_LONG).show()

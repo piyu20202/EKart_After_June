@@ -483,7 +483,7 @@ public class MainActivity extends DrawerActivity {
                                 callSettingApi_messurment();
                             }
 
-                            section.setProductList(ApiConfig.GetFeatureProduct_2(jsonArray_products,measurement_list) );
+                            section.setProductList(ApiConfig.GetFeatureProduct_2(jsonArray_products,measurement_list,session) );
                             sectionList.add(section);
 
                             sectionView.setVisibility(View.VISIBLE);
@@ -910,13 +910,14 @@ public class MainActivity extends DrawerActivity {
         } else if (id == R.id.lytcategory) {
             OnViewAllClick(view);
         } else if (id == R.id.lytfav) {
-               if(session.getData(Constant.CAT_ID).length() > 0)
+               /*if(session.getData(Constant.CAT_ID).length() > 0)
                {
                  startActivity(new Intent(MainActivity.this, FavouriteActivity.class).putExtra("cat_id", session.getData(Constant.CAT_ID)));
                }
                else{
                    Toast.makeText(mContext, "Please Select Category First", Toast.LENGTH_SHORT).show();
-               }
+               }*/
+            startActivity(new Intent(MainActivity.this, FavouriteActivity.class));
 
         } else if (id == R.id.layoutSearch) {
             //startActivity(new Intent(MainActivity.this, SearchActivity.class).putExtra("from", Constant.FROMSEARCH));

@@ -276,8 +276,16 @@ public class ProductListActivity_2 extends AppCompatActivity {
                                if(is_productlist_clear)
                                {
                                    arrayList_product =  new ArrayList<>();
-                                   //arrayList_product.clear();
-                                   arrayList_product = ApiConfig.GetProductList_2(jsonArray_products, measurement_list);
+
+                                   if(endingPoint == 0)
+                                   {
+                                       arrayList_product = ApiConfig.GetProductList_2(jsonArray_products, measurement_list,session);
+                                   }
+                                   /*else if(endingPoint > 0)
+                                   {
+                                       arrayList_product.addAll(ApiConfig.GetProductList_2(jsonArray_products, measurement_list));
+                                   }*/
+
 
                                    //first time case
                                    if(endingPoint == 0 && jsonArray_products.length() == 0)
@@ -297,6 +305,11 @@ public class ProductListActivity_2 extends AppCompatActivity {
                                        recycler_View_ver.setAdapter(productListAdapter);
 
                                    }
+
+                               }
+                               else{
+                                   arrayList_product.addAll(ApiConfig.GetProductList_2(jsonArray_products, measurement_list,session));
+                                   productListAdapter.notifyDataSetChanged();
 
                                }
 

@@ -14,7 +14,7 @@ public class ApiClient {
     /*========================================================================================================*/
 
     //offline path
-    public static final String BASE_URL = "http://ifresh.co.in/paytm_checksum.php/";
+    public static final String BASE_URL = "http://ifresh.co.in/";
     private static Retrofit retrofit = null;
     private static ApiInterface apiWorkInterface;
 

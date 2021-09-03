@@ -305,7 +305,7 @@ public class CartActivity_2 extends AppCompatActivity {
                                         JSONObject data_obj = data_arr.getJSONObject(0);
                                         JSONArray jsonArray_products = data_obj.getJSONArray("products");
 
-                                        ModelProduct product = ApiConfig.GetCartList2(jsonArray_products, ids[1], ids[4], databaseHelper, measurement_list);
+                                        ModelProduct product = ApiConfig.GetCartList2(jsonArray_products, ids[1], ids[4], databaseHelper, measurement_list,session);
 
                                         if (product != null) {
                                             productArrayList.add(product);
@@ -350,7 +350,6 @@ public class CartActivity_2 extends AppCompatActivity {
         ApiConfig.GetPaymentConfig_2(activity,session);
         callSettingApi_messurment();
         minimum_order();
-
         if (databaseHelper.getTotalItemOfCart() == 0)
         {
             lytempty.setVisibility(View.VISIBLE);

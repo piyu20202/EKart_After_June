@@ -201,7 +201,7 @@ public class MedicalListActivity_2 extends AppCompatActivity {
                             if(jsonArray_products.length() > 0)
                             {
                                 //call function
-                                arrayList_product =ApiConfig.GetProductList_2(jsonArray_products, measurement_list);
+                                arrayList_product =ApiConfig.GetProductList_2(jsonArray_products, measurement_list,session);
                                 if(arrayList_product.size() > 0)
                                 {
                                     nodata_view.setVisibility(View.GONE);

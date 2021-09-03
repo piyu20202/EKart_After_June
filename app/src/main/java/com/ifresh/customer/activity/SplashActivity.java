@@ -104,8 +104,11 @@ public class SplashActivity extends AppCompatActivity {
                  ApiConfig.Call_GuestToken(activity,session);
             }
         }
+
+
         ApiConfig.GetSettings_Api(activity,mContext);
         ApiConfig.GetSettingConfigApi(activity, session);
+
 
 
         final Handler handler = new Handler();
